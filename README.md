@@ -200,7 +200,7 @@ WantedBy=multi-user.target
 ```
 
 **Note**: 
-- Replace `v22.14.0` in both the PATH and ExecStart with your actual Node.js version path (from `which node` command)
+- Replace `v24.13.0` in both the PATH and ExecStart with your actual Node.js version path (from `which node` command)
 
 ## Step 7: Enable and Start the Service
 
