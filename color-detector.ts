@@ -1,5 +1,6 @@
 /// <reference path="./get-pixels.d.ts" />
 import getPixels from 'get-pixels';
+import { suggestClosestPMS } from './colors';
 import logger from './logger';
 
 const WHITE_COLOR_STR = '255,255,255';
@@ -82,7 +83,11 @@ class ColorDetector {
         }
       }
       if (colorsNumber > MAXIMUM_COLORS_LOGO_MAY_HAVE) {
-        // throw new Error('Detection error: Too many colors');
+        return {
+          success: false,
+          error: 'Detection error: Too many colors.',
+          colorsCount: 9,
+        }
       }
       const whitePixelsNumber =
         rgbObject[WHITE_COLOR_STR]?.amount || 0;
@@ -105,12 +110,20 @@ class ColorDetector {
         onePercent,
         transparentPixelsNumber,
       });
+
+      const detectedColors = suggestClosestPMS(hexColors, { addCSuffix: true });
+
+      // Add deduplication:
+      const uniqueDetectedColors = Array.from(
+        new Map(detectedColors.map(color => [color.pms, color])).values()
+      );
+
       logger.info('parseColors completed');
 
       return {
         success: true,
-        colorsCount: hexColors.length,
-        colors: hexColors,
+        colorsCount: uniqueDetectedColors.length,
+        colors: uniqueDetectedColors,
         hasBackground,
       }
     } catch (error: any) {
