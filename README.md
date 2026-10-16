@@ -1,7 +1,13 @@
-# How to Run This Application
+# color-detector
+
+[![CI](https://github.com/nicolasMazuryk/color-detector/actions/workflows/ci.yml/badge.svg)](https://github.com/nicolasMazuryk/color-detector/actions/workflows/ci.yml)
+
+TypeScript/Node service that extracts an image's dominant colour palette and maps it to the closest named colours.
+
+## How to run
 
 ## Prerequisites
-- Node.js 22+ (check with `node --version`)
+- Node.js 20+ (check with `node --version`)
 - npm (Node package manager, comes with Node.js)
 
 ## Step 1: Install Dependencies
@@ -259,3 +265,7 @@ sudo systemctl stop color-detector.service
 ```bash
 sudo netstat -tulpn | grep 8000
 ```
+
+## License
+
+[MIT](LICENSE)
